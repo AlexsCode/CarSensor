@@ -32,17 +32,25 @@ private:
     static const quint16 arduino_uno_product_id = 67;
     QString arduino_port_name;
     bool arduino_is_available;
+
+    //Serial Buffer/Read info
     QString ReadData;
     QByteArray serialIn;
     QString serialBuffer;
     QStringList bufferSplit;
     QStringList serialLineSplit;
+
+    //Sensor Strings
     QString rightSensorstr;
     QString leftSensorstr;
+
+    //Sensor values
     double leftSensorint;
     double rightSensorint;
     double invertedleftSensorint;
     double invertedrightSensorint;
+
+    //colour change information.
     QString danger = "QProgressBar::chunk {background: red }";
     QString safe = "QProgressBar::chunk { background: green} ";
     QString semidanger ="QProgressBar::chunk{ background: orange}";

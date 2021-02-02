@@ -4,6 +4,10 @@
 #include <QSerialPortInfo>
 #include <QDebug>
 
+/**
+ * @brief Main window contructor and Environment setup
+ * @param parent QT created Object.
+ */
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -58,20 +62,23 @@ MainWindow::~MainWindow()
     delete ui;
 
 }
-
+/**
+ * @brief Serial reading from ardunio, reading as array into a buffer then split as to indicate where new inputs start.
+ * buffer is split with
+ */
 void MainWindow::readSerial(){
-    QByteArray serialIn = arduino->readAll();
-    serialBuffer += QString::fromStdString(serialIn.toStdString());
-    //qDebug()<<serialBuffer;
-    bufferSplit = serialBuffer.split("\n");
-    if(bufferSplit.length()>=3){
-        qDebug()<<bufferSplit[1];
-        //static QString serialline2 = bufferSplit[1];
+    QByteArray serialIn = arduino->readAll(); //this saves current info from the arduino into ByteArray
+    serialBuffer += QString::fromStdString(serialIn.toStdString()); //String is easiest way to lump this data.
+    bufferSplit = serialBuffer.split("\n"); //Stringlist provides best supported array of string information
+
+    if(bufferSplit.length()>=3){ //Adds a future component requirement to make sure buffer is filled.
+
         MainWindow::updatetext(bufferSplit[1]);
         MainWindow::updateProgressbar(bufferSplit[1]);
-        serialBuffer="";
+        serialBuffer=""; //resetting serial buffer.
     }
 }
+
 
 void MainWindow::updatetext(const QString reading)
 {
@@ -79,19 +86,31 @@ void MainWindow::updatetext(const QString reading)
 
 }
 
+
 void MainWindow::updateProgressbar(const QString valuein)
-{   serialLineSplit.clear();
+{
+    //Clearing string list and string buffers.
+    serialLineSplit.clear();
     leftSensorstr ="";
     rightSensorstr="";
-    serialLineSplit = valuein.split(" "); // spliting the serial line
-    leftSensorstr=serialLineSplit[0]; // assigning left and right to separate String var
+
+    //using the passed parameter to add values into the stringlist.
+    // spliting the serial line which contains left and right sensor data.
+    serialLineSplit = valuein.split(" ");
+
+    // assigning left and right to separate String vars
+    leftSensorstr=serialLineSplit[0];
     rightSensorstr=serialLineSplit[1];
+
+    //Cutting out pre-amble information from string.
     leftSensorstr.remove(0,5);
     rightSensorstr.remove(0,5);
+
+    //Converting from strings into Doubles for high precision data.
     leftSensorint = leftSensorstr.toDouble();
     rightSensorint = rightSensorstr.toDouble();
-    //QString debug_rightSensorint =QString::number(rightSensorint);
-   // ui->textEdit->setText(debug_rightSensorint);
+
+    //Setting up the GUI Progress bars appearance and ranges
     ui->progressBar->setRange(0, 100);
     ui->progressBar_2->setRange(0,100);
     ui->progressBar->setInvertedAppearance(0);
@@ -100,10 +119,8 @@ void MainWindow::updateProgressbar(const QString valuein)
     ui->progressBar_2->setStyleSheet(error);
     ui->progressBar->setTextVisible(1);
     ui->progressBar_2->setTextVisible(1);
-    //inverter
-    //invertedrightSensorint=100-rightSensorint;
-    //invertedleftSensorint=100-leftSensorint;
 
+    //imposing limits which catagories into different coloured bars. Alerting for danger.
     if(rightSensorint>10&&rightSensorint<500){
         if(leftSensorint>10&&leftSensorint<500){
 
@@ -127,8 +144,6 @@ void MainWindow::updateProgressbar(const QString valuein)
             else if (rightSensorint>50) {
                 ui->progressBar_2->setStyleSheet(safe);
             }
-
-             qDebug()<<"Graph Reset";
     }}
     else {
         qDebug()<<"Error on read value";

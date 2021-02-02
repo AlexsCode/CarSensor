@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.11.3
+** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -31,36 +31,36 @@ public:
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
-            MainWindow->setObjectName(QStringLiteral("MainWindow"));
+            MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(428, 344);
         QFont font;
-        font.setFamily(QStringLiteral("Serif"));
+        font.setFamily(QString::fromUtf8("Serif"));
         font.setPointSize(20);
         MainWindow->setFont(font);
-        MainWindow->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
+        MainWindow->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
         centralWidget = new QWidget(MainWindow);
-        centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        centralWidget->setStyleSheet(QStringLiteral(""));
+        centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        centralWidget->setStyleSheet(QString::fromUtf8(""));
         horizontalLayout = new QHBoxLayout(centralWidget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         progressBar = new QProgressBar(centralWidget);
-        progressBar->setObjectName(QStringLiteral("progressBar"));
+        progressBar->setObjectName(QString::fromUtf8("progressBar"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(progressBar->sizePolicy().hasHeightForWidth());
         progressBar->setSizePolicy(sizePolicy);
         QFont font1;
-        font1.setFamily(QStringLiteral("Serif"));
+        font1.setFamily(QString::fromUtf8("Serif"));
         font1.setPointSize(20);
         font1.setBold(false);
         font1.setWeight(50);
         progressBar->setFont(font1);
         progressBar->setLayoutDirection(Qt::LeftToRight);
         progressBar->setAutoFillBackground(false);
-        progressBar->setStyleSheet(QStringLiteral(""));
+        progressBar->setStyleSheet(QString::fromUtf8(""));
         progressBar->setValue(24);
         progressBar->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         progressBar->setTextVisible(false);
@@ -75,7 +75,7 @@ public:
         horizontalLayout->addItem(horizontalSpacer);
 
         progressBar_2 = new QProgressBar(centralWidget);
-        progressBar_2->setObjectName(QStringLiteral("progressBar_2"));
+        progressBar_2->setObjectName(QString::fromUtf8("progressBar_2"));
         sizePolicy.setHeightForWidth(progressBar_2->sizePolicy().hasHeightForWidth());
         progressBar_2->setSizePolicy(sizePolicy);
         progressBar_2->setFont(font1);
