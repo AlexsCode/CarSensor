@@ -1,5 +1,5 @@
 QT += testlib
-QT += gui
+QT += gui core serialport widgets
 CONFIG += qt warn_on depend_includepath testcase
 
 TEMPLATE = app

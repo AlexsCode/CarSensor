@@ -12,12 +12,16 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    //Generic Setup
     ui->setupUi(this);
+
+    //Ardunio being the name as not to confuse what the serial is communicating with.
     arduino = new QSerialPort;
     arduino_is_available = false;
     arduino_port_name = "";
     serialBuffer="";
 
+    //Device Configuration to allow for Vendor setup on specific boards.
     qDebug() << "Number of Availible Ports: "<< QSerialPortInfo::availablePorts().length();
     foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
             qDebug() << "Has vendor ID: " << serialPortInfo.hasVendorIdentifier();
@@ -39,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
             }
         }
 
+    //Checks the current port is the requested board and configures the serial port.
     if(arduino_is_available){
         arduino->setPortName(arduino_port_name);
         arduino->open(QSerialPort::ReadOnly);
@@ -57,6 +62,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    //Serial port must be closed before main obj deletion to prevent bugs on serial.
     if(arduino->isOpen()){
             arduino->close();}
     delete ui;
@@ -79,14 +85,21 @@ void MainWindow::readSerial(){
     }
 }
 
-
+/**
+ * @brief Function for updating the distance away text overlay on the progressbars.
+ * @param reading - passed arg of distance.
+ */
 void MainWindow::updatetext(const QString reading)
 {
 
 
 }
 
-
+/**
+ * @brief Progress Bar updater function, changing progress bar size and colour to correspond to serial data.
+ * @param data passed in string form of sensor output.
+ * @details contains limits and debug code.
+ */
 void MainWindow::updateProgressbar(const QString valuein)
 {
     //Clearing string list and string buffers.

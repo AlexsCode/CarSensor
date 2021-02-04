@@ -6,6 +6,9 @@
 #include <QSerialPortInfo>
 #include <QDebug>
 
+//#include "../UnitTests/tst_unit.cpp"
+
+
 namespace Ui {
 class MainWindow;
 }
@@ -18,12 +21,14 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
+public slots:
     void readSerial();
     void updatetext(const QString);
     void updateProgressbar(const QString);
 
 private:
+
+
     Ui::MainWindow *ui;
     QSerialPort *arduino;
 

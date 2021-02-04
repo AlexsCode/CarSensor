@@ -1,6 +1,7 @@
 #include <QtTest>
+#include "../Serial Readout/mainwindow.h"
+#include <QString>
 
-// add necessary includes here
 
 class Unit : public QObject
 {
@@ -9,15 +10,20 @@ class Unit : public QObject
 public:
     Unit();
     ~Unit();
+    Ui::MainWindow *WindowObj;
 
 private slots:
     void test_case1();
+
+private:
+//    MainWindow WindowObj;
+
 
 };
 
 Unit::Unit()
 {
-
+    WindowObj;
 }
 
 Unit::~Unit()
@@ -27,7 +33,9 @@ Unit::~Unit()
 
 void Unit::test_case1()
 {
+    QString here="";
 
+    WindowObj->updateProgressbar(here);
 }
 
 QTEST_APPLESS_MAIN(Unit)
